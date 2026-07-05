@@ -10,10 +10,10 @@ variables:
   userrepo: 'credpay/user'
 stages:
   - stage: DockerBuild
-    displayName: Docker Build Images
+    displayName: Build Docker Images
     jobs:
-      - job: buildandpushImages
-        displayName: BuildandImages
+      - job: BuildandpushImages
+        displayName: Build Docker Images
         steps:
         - checkout: self
         - task: Docker@2
@@ -23,6 +23,6 @@ stages:
             command: 'buildAndPush'
             Dockerfile: 'frontend-react/Dockerfile'
             buildContext: frontend-react
-            tags: ¦
+            tags: |
               $(tag)
               latest
