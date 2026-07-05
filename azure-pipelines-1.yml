@@ -29,7 +29,7 @@ stages:
         - task: Docker@2
           inputs:
             containerRegistry: 'credpay-acr'
-            repository: '$( paymentrepo)'
+            repository: '$(paymentrepo)'
             command: 'buildAndPush'
             Dockerfile: 'payment-service/Dockerfile'
             buildContext: payment-service
