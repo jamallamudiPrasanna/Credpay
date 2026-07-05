@@ -2,9 +2,26 @@ trigger:
 - main
 pool:
   vmImage: 'Ubuntu-latest'
-steps:
-  - checkout: srlf
-  - script: |
-      echo "repository folder structure"
-      pwd
-      ls -la
+variables:
+  acrserviceconnection: credpay-acr
+  tag: '$(Build.BuildId)'
+  frontendrepo: 'credpay/frontend'
+  paymentrepo: 'credpay/paymemt'
+  userrepo: 'credpay/user'
+stages:
+  - stage: DockerBuild
+    displayName: Docker Build Images
+    jobs:
+      - job: buildandpushImages
+        displayName: BuildandImages
+        steps:
+        - checkout: self
+        - task: Docker@2
+          inputs:
+            containerRegistry: 'credpay-acr'
+            repository: '$(frontendrepo)'
+            command: 'buildAndPush'
+            Dockerfile: 'frontend-react/Dockerfile'
+            tags: ¦
+              $(tag)
+              latest
