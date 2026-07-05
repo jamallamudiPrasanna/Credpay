@@ -1,10 +1,10 @@
 trigger:
--main
+- main
 pool:
   vmImage: 'Ubuntu-latest'
 steps:
   - checkout: srlf
   - script: ¦
-    echo "repository folder structure"
-    pwd
-    ls -la
+      echo "repository folder structure"
+      pwd
+      ls -la
