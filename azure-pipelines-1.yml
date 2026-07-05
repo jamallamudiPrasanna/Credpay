@@ -26,3 +26,23 @@ stages:
             tags: |
               $(tag)
               latest
+        - task: Docker@2
+          inputs:
+            containerRegistry: 'credpay-acr'
+            repository: '$( paymentrepo)'
+            command: 'buildAndPush'
+            Dockerfile: 'payment-service/Dockerfile'
+            buildContext: payment-service
+            tags: |
+              $(tag)
+              latest
+        - task: Docker@2
+          inputs:
+            containerRegistry: 'credpay-acr'
+            repository: '$(userrepo)'
+            command: 'buildAndPush'
+            Dockerfile: 'user-service/Dockerfile'
+            buildContext: user-service
+            tags: |
+              $(tag)
+              latest
